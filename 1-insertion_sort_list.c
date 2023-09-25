@@ -1,5 +1,4 @@
 #include "sort.h"
-#include <stdio.h>
 #include <limits.h>
 
 void insert_min_node_head(listint_t **list);
@@ -14,6 +13,9 @@ void insert_min_node_head(listint_t **list);
 void insertion_sort_list(listint_t **list)
 {
 	listint_t *cur, *p, *prev, *next, *tmp;
+
+	if (list == NULL || *list == NULL)
+		return;
 
 	insert_min_node_head(list);
 
