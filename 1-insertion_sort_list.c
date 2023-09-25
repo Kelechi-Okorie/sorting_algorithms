@@ -3,11 +3,9 @@
 #include <limits.h>
 
 void insert_min_node_head(listint_t **list);
-void print_forward(listint_t *list);
-void print_back(listint_t *list);
 
 /**
- * insertion_sort_list - sorts a doubly linked list of integers using insertion sort
+ * insertion_sort_list - sorts a doubly linked list using insertion sort
  * @list: address of the head of the list
  *
  * Description: sorts a doubly linked list of integers using insertion sort
@@ -30,16 +28,40 @@ void insertion_sort_list(listint_t **list)
 		{
 			if (p->n > cur->n)
 			{
+				next = cur->next;
+				prev = cur->prev;
+
+				prev->next = next;
+				if (next)
+					next->prev = prev;
+
+				prev = p->prev;
+				prev->next = cur;
+				p->prev = cur;
+				cur->prev = prev;
+				cur->next = p;
+
+				print_list((*list)->next);
 			}
 			p = p->prev;
 		}
-		cur = tmp;
 
-		(void) next;
-		(void) prev;
+		cur = tmp;
 	}
+
+	tmp = *list;
+	*list = (*list)->next;
+	free(tmp);
+	(*list)->prev = NULL;
 }
 
+/**
+ * insert_min_node_head - inserts dummy node at head of list
+ * @list: the list
+ *
+ * Description: inserts dummy node at the head of the list
+ * Return: alway void
+ */
 void insert_min_node_head(listint_t **list)
 {
 	listint_t *node;
