@@ -1,7 +1,7 @@
 #include "sort.h"
 
 void q_sort(int *array, int start, int end, size_t size);
-size_t partition(int *array, size_t start, size_t end, size_t size);
+int partition(int *array, size_t start, size_t end, size_t size);
 
 /**
  * quick_sort - sorts an array using quick sort algorithm
@@ -49,7 +49,7 @@ void q_sort(int *array, int start, int end, size_t size)
  * Description: partitions an array for quick sort
  * Return: always void
  */
-size_t partition(int *array, size_t start, size_t end, size_t size)
+int partition(int *array, size_t start, size_t end, size_t size)
 {
 	int pivot, temp;
 	size_t i, j;
@@ -57,9 +57,9 @@ size_t partition(int *array, size_t start, size_t end, size_t size)
 	pivot = array[end];
 	i = start - 1;
 
-	for (j = start; j < end; j++)
+	for (j = start; j <= end - 1; j++)
 	{
-		if (array[j] < pivot)
+		if (array[j] <= pivot)
 		{
 			i++;
 			temp = array[j];
