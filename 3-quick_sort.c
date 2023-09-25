@@ -52,28 +52,27 @@ void q_sort(int *array, int start, int end, size_t size)
 size_t partition(int *array, size_t start, size_t end, size_t size)
 {
 	int pivot, temp;
-	size_t p_index, i;
+	size_t i, j;
 
 	pivot = array[end];
-	p_index = start;
+	i = start - 1;
 
-	for (i = start; i < end; i++)
+	for (j = start; j <= end - 1; j++)
 	{
-		if (array[i] <= pivot)
+		if (array[j] <= pivot)
 		{
-			temp = array[i];
-			array[i] = array[p_index];
-			array[p_index] = temp;
+			i++;
+			temp = array[j];
+			array[j] = array[i];
+			array[i] = temp;
 
 			print_array(array, size);
-
-			p_index++;
 		}
 	}
 
-	temp = array[p_index];
-	array[p_index] = array[end];
+	temp = array[i + 1];
+	array[i + 1] = array[end];
 	array[end] = temp;
 
-	return (p_index);
+	return (i + 1);
 }
